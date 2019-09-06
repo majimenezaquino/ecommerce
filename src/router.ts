@@ -13,13 +13,26 @@ export default new Router({
       name: 'home',
       component: Home,
     },
+    //Account.vue
     {
-      path: '/about',
-      name: 'about',
+      path: '/account',
+      name: 'account',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      component: () => import(/* webpackChunkName: "about" */ '@/views/Account.vue'),
+    },
+
+  
+
+    //paginas de errores
+    {
+      path: '*',
+      name: 'page404',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('@/views/error/page404.vue'),
     },
   ],
 });
