@@ -103,6 +103,11 @@ export default {
   components:{
     LayoutDefault
   },
+  data(){
+      return{
+        usuario
+      }
+  },
   methods:{
     getLogin(){
 			let _this =this;

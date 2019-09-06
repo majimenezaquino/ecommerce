@@ -26,6 +26,9 @@ export default new Vuex.Store({
    status: ''
 
   },
+  getters:{
+    isLoggedIn: state => !!state.usuario.login,
+  },
   mutations: {
     auth_request(state) {
       state.status = 'loading'
