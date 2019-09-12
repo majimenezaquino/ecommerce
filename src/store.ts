@@ -75,7 +75,42 @@ export default new Vuex.Store({
                   reject(err.response)
               })
       })
-  }
+  },
+
+
+  register({ commit }, usuario) {
+    return new Promise((resolve, reject) => {
+        commit('auth_request')
+
+        axios.defaults.headers.common['Authorization'] = 'Bearer BearerToken'
+        axios({ url: `${HOST_URL}/registro`, data: usuario, method: 'POST' })
+            .then(resp => {
+
+                if (resp.data.success) {
+
+                    let usuario = resp.data.usuario;
+                    usuario.token = resp.data.token;
+                    usuario.login = true;
+                    localStorage.setItem(DB_LOCAL, JSON.stringify(usuario))
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${usuario.token}`
+                    commit('auth_success', usuario)
+                    resolve(resp)
+                } else {
+                    commit('auth_error')
+                    localStorage.removeItem(DB_LOCAL)
+                    reject(resp.data.message)
+                }
+
+            })
+            .catch(err => {
+                commit('auth_error')
+                localStorage.removeItem(DB_LOCAL)
+                reject(err.response)
+            })
+    })
+},
+
+  
 
   },
 });

@@ -4,6 +4,10 @@ import router from './router';
 import store from './store';
 import Axios from 'axios'
 const { DB_LOCAL } = require('@/config')
+import VueSweetalert2 from 'vue-sweetalert2';
+ 
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.prototype.$http = Axios;
 const usuario = function() {
     let usuario = localStorage.getItem(DB_LOCAL) || undefined;
@@ -19,6 +23,7 @@ if (usuario) {
 }
 
 Vue.config.productionTip = false;
+Vue.use(VueSweetalert2);
 
 new Vue({
   router,
